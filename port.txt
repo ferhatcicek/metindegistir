@@ -1,0 +1,30 @@
+
+    port 1/1/1
+        description "test"
+        ethernet
+            down-when-looped
+                no shutdown
+            exit
+            lldp
+                dest-mac nearest-bridge
+                    admin-status tx-rx
+                    notification
+                    tx-tlvs port-desc sys-name sys-cap
+                    tx-mgmt-address system
+                exit
+            exit
+            hold-time up 10
+            report-alarm signal-fail no-frame-lock high-ber no-block-lock no-am-lock duplicate-lane
+        exit
+        no shutdown
+    port 1/1/2
+        description "test2"
+        ethernet
+            dot1x
+                tunneling
+            exit
+            mode hybrid
+            encap-type dot1q
+        exit
+        no shutdown
+ 
